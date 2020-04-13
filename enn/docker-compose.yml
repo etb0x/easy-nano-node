@@ -6,7 +6,7 @@ services:
     ports:
      - "8080:80"
     volumes:
-     - "~:/opt"
+     - "/mnt/volume_nyc3_03:/opt"
   nanonode:
     image: "nanocurrency/nano"
     restart: "unless-stopped"
@@ -15,7 +15,7 @@ services:
      - "7075:7075"
      - "::1:7076:7076"
     volumes:
-     - "~:/root"
+     - "/mnt/volume_nyc3_03:/root"
   watchtower:
     image: "v2tec/watchtower"
     restart: "unless-stopped"
