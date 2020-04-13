@@ -30,7 +30,7 @@ sleep 5s
 if [ -f /opt/nanoNodeMonitor/modules/config.php ]; then
 
   echo "== Old monitor config found, replacing..."
-  cp /opt/nanoNodeMonitor/modules/config.php ~/nanoNodeMonitor/config.php
+  cp /opt/nanoNodeMonitor/modules/config.php /mnt/volume_nyc3_03/nanoNodeMonitor/config.php
 
   echo "== Removing old monitor"
   rm -r /opt/nanoNodeMonitor
@@ -56,25 +56,16 @@ else
   echo "== Modifying the monitor config"
 
   # uncomment account
-  sed -i -e 's#// $nanoNodeAccount#$nanoNodeAccount#g' ~/nanoNodeMonitor/config.php
+  sed -i -e 's#// $nanoNodeAccount#$nanoNodeAccount#g' /mnt/volume_nyc3_03/nanoNodeMonitor/config.php
 
   # replace account
-  sed -i -e "s/xrb_1f56swb9qtpy3yoxiscq9799nerek153w43yjc9atoaeg3e91cc9zfr89ehj/$account/g" ~/nanoNodeMonitor/config.php
+  sed -i -e "s/xrb_1f56swb9qtpy3yoxiscq9799nerek153w43yjc9atoaeg3e91cc9zfr89ehj/$account/g" /mnt/volume_nyc3_03/nanoNodeMonitor/config.php
 
   # uncomment ip
-  sed -i -e 's#// $nanoNodeRPCIP#$nanoNodeRPCIP#g' ~/nanoNodeMonitor/config.php
+  sed -i -e 's#// $nanoNodeRPCIP#$nanoNodeRPCIP#g' /mnt/volume_nyc3_03/nanoNodeMonitor/config.php
 
   # replace ip
-  sed -i -e 's#\[::1\]#enn_nanonode_1#g' ~/nanoNodeMonitor/config.php
-
-  echo "== Disabling RPC logging"
-  sed -i -e 's#"log_rpc": "true"#"log_rpc": "false"#g' ~/RaiBlocks/config.json
-
-  echo "== Opening Nano Node Port"
-  sudo ufw allow 7075
-  
-  echo "== Denying RPC Port"
-  sudo ufw deny 7076
+  sed -i -e 's#\[::1\]#enn_nanonode_1#g' /mnt/volume_nyc3_03/nanoNodeMonitor/config.php
 
   echo "== Restarting Nano node container"
   sudo docker restart enn_nanonode_1
